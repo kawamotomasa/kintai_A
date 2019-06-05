@@ -1,2 +1,6 @@
-<h1>勤怠システム</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% provide(:title, "ホーム") %>
+<div class="center jumbotron">
+ <h1>勤怠システム</h1>
+ <p>このアプリケーションでは、登録されたユーザーの勤怠情報を閲覧・登録・編集することができます。</p>
+ <%= link_to "ログイン", signup_path, class: "btn btn-lg btn-primary "%>
+</dib>
