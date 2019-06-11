@@ -5,7 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "トップへ", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "ユーザ一覧", '#' %></li>
+          <li><%= link_to "ユーザ一覧", users_path %></li>
           <li><%= link_to "基本情報の修正", '#' %></li>
           
           <li class="dropdown">
@@ -14,7 +14,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "勤怠情報表示", current_user %></li>
-              <li><%= link_to "設定", current_user %></li>
+              <li><%= link_to "アカウント情報の更新", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "ログアウト", logout_path, method: :delete %>
