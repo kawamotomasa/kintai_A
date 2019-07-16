@@ -78,7 +78,7 @@ class AttendancesController < ApplicationController
       end
     end
     return attendances
-  end
+    end
     
     
 end
