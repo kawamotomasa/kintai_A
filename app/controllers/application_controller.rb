@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   $days_of_the_week = %w{日 月 火 水 木 金 土}
-  week = $days_of_the_week
   
   # beforフィルター
 

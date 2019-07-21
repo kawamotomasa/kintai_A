@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    if params[:name].present? 
+    @users = @users.get_by_name params[:name]
+    end
   end
 
   def show
@@ -75,6 +78,4 @@ class UsersController < ApplicationController
         redirect_to(root_url)
       end  
     end
-    
-    
 end

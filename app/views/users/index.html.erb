@@ -1,5 +1,22 @@
 <% provide(:title, 'All Users') %>
-<h1>ユーザー一覧</h1>
+<% provide(:button_text, '検索') %>
+
+
+
+<% if params[:name].present?  %>
+ <h1>検索結果</h1>
+<% else %>
+ <h1>ユーザー一覧</h1>
+<% end %>
+
+<div>
+<p1> ユーザー検索
+<%= form_tag(users_path, method: "get") do %>
+<%= text_field_tag :name, params[:name] %>
+<%= submit_tag yield(:button_text), class: "btn btn-primary btn-#{yield(:class_text)}" %>
+<% end %>
+</p1>
+</div>
 
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
