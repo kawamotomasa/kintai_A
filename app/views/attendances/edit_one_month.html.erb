@@ -28,7 +28,7 @@
           <% end %>
           <td>
             <% if day.started_at.present? && day.finished_at.present? %>
-              <%= working_times(day.started_at, day.finished_at) %>
+              <%= working_times(day.started_at.floor_to(15.minutes), day.finished_at.floor_to(15.minutes)) %>
             <% end %>
           </td>
            <% if  (Date.current < day.worked_on) %>
