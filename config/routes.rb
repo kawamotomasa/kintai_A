@@ -17,5 +17,8 @@ Rails.application.routes.draw do
     patch 'attendances/update_one_month'
    end
    resources :attendances, only: :update
- end
+   end
+   resources 'objects', only: :index do
+   collection { post :import }
+  end
 end

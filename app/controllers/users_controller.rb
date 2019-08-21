@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
   end
-
+  
   private
 
     def user_params
@@ -78,4 +78,19 @@ class UsersController < ApplicationController
         redirect_to(root_url)
       end  
     end
+    
+     def import_emails
+      # 登録処理前のレコード数
+      current_email_count = ::Email.count
+      emails = []
+      # windowsで作られたファイルに対応するので、encoding: "SJIS"を付けている
+      CSV.foreach(params[:emails_file].path, headers: true, encoding: "SJIS") do |row|
+        emails << ::Email.new({ name: row["name"], email: row["email"] })
+      end
+      # importメソッドでバルクインサートできる
+      ::Email.import(emails)
+      # 何レコード登録できたかを返す
+      ::Email.count - current_email_count
+     end
+    
 end
