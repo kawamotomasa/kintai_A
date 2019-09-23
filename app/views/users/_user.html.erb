@@ -9,15 +9,24 @@
   
   <%= f.label :department, class: "label-#{yield(:class_text)}" %>
   <%= f.text_field :department, class: "form-control" %>
+  
+  <%= f.label :社員番号, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :employee_number, class: "form-control" %>
 
+  <%= f.label :カードID, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :uid, class: "form-control" %>
+  
   <%= f.label :password, class: "label-#{yield(:class_text)}" %>
   <%= f.password_field :password, class: "form-control" %>
 
-  <%= f.label :password_confirmation,  class: "label-#{yield(:class_text)}" %>
-  <%= f.password_field :password_confirmation, class: "form-control" %>
-  
   <%= f.label :basic_time, class: "label-#{yield(:class_text)}" %>
   <p> <%= f.time_field :basic_time, class: "form-control" %><p>
+  
+  <%= f.label :指定勤務開始時間, class: "label-#{yield(:class_text)}" %>
+  <p> <%= f.time_field :designated_work_start_time, class: "form-control" %><p>
+    
+  <%= f.label :指定勤務終了時間, class: "label-#{yield(:class_text)}" %>
+  <p> <%= f.time_field :designated_work_end_time, class: "form-control" %><p>
 
   <%= f.submit yield(:button_text2), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
 <% end %>

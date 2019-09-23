@@ -1,5 +1,5 @@
-class Product < ActiveRecord::Base
-  def self.import(file)
+class Object < ApplicationRecord 
+ def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
 
       obj = new
@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
 
       obj.save!
     end
-  end
+ end
 
   def self.updatable_attributes
     ["name","status","content"]

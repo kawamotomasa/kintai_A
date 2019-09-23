@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:edit_overwork_request]
   #before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   #before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
+  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info,:working,:bases,:edit_overwork_request]
   before_action :admin_or_correct_user, only: [:index,:show,:edit,:update]
   before_action :set_one_month, only: :show
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"
-      redirect_to @user
+      redirect_to users_url
     else
       render :edit      
     end
@@ -62,10 +62,22 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def edit_overwork_request
+  end
+  
+  def update_overwork_request
+  end
+  
+  
+
+  def bases
+  end
+  
+  
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :department, :password,:employee_number,:uid, :basic_time, :designated_work_start_time, :designated_work_end_time)
     end
 
     def basic_info_params
@@ -78,19 +90,4 @@ class UsersController < ApplicationController
         redirect_to(root_url)
       end  
     end
-    
-     def import_emails
-      # 登録処理前のレコード数
-      current_email_count = ::Email.count
-      emails = []
-      # windowsで作られたファイルに対応するので、encoding: "SJIS"を付けている
-      CSV.foreach(params[:emails_file].path, headers: true, encoding: "SJIS") do |row|
-        emails << ::Email.new({ name: row["name"], email: row["email"] })
-      end
-      # importメソッドでバルクインサートできる
-      ::Email.import(emails)
-      # 何レコード登録できたかを返す
-      ::Email.count - current_email_count
-     end
-    
 end

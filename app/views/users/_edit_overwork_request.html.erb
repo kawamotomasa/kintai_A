@@ -1,0 +1,46 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+  <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">【残業申請】</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @attendance, url: update_overwork_request_user_path(@user), local: true, method: :patch) do |f| %> 
+        <%= f.hidden_field :id, :value => @attendance %>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+           <th>日付</th>
+           <th>曜日</th>
+           <th>終了予定時間</th>
+           <th>翌日</th>
+           <th>業務処理内容</th>
+           <th>指示者確認㊞</th>
+         </tr>
+         </thead>
+       <tbody>
+           
+        
+        
+         <tr>
+          <td><%= @day %></td>
+          <td><%= @youbi %></td>
+          <td><%= f.time_field :finished_overwork_at, class: "form-control" %></td>
+          <td><%= f.check_box(:next_day, { :checked => false  }) %></td>
+          <td><%= f.text_field :work_process, class: "form-control" %></td>
+          <td><%= f.select :superior, [["superior", "上長"],["管理者", "管理者"]],:include_blank => true ,class:"form-control" %></td>
+         </tr>
+         
+       </tbody>
+       </table>
+      
+      <div class="modal-footer">
+        <%= f.submit "残業を申請する", class: "btn btn-primary" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+      </div>
+     </div> 
+      <% end %>
+  </div>
+</div>  

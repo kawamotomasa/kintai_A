@@ -35,3 +35,7 @@ end
   def working_times(start, finish)
     format("%.2f", (((finish - start) / 60) / 60.0))
   end
+
+def user_attendances_month_date
+    @user.attendances.where('worked_on >= ? and worked_on <= ?', @first_day, @last_day).order('worked_on')
+end

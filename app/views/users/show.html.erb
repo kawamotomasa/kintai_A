@@ -59,8 +59,10 @@
     <tbody>
       <% @attendances.each do |day| %>
         <tr>
-          <td><%= link_to "残業申請", "#", class: "btn btn-primary" %><br></td>
-          <td><%= l(day.worked_on, format: :short) %></td>
+         <td>  
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_overwork_request">残業申請</button>
+         </td>
+         <td><%= l(day.worked_on, format: :short) %></td>
           <td>
             <%if day.worked_on.wday == 0 %>
              <font color="Red"><%= $days_of_the_week[day.worked_on.wday] %></font> <br/>
@@ -110,4 +112,7 @@
       </tr>
     </tfoot>
   </table>
+</div>
+<div class="modal fade" id="edit_overwork_request" tabindex="-1">
+    <%= render "edit_overwork_request" %>
 </div>
