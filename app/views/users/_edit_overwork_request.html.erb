@@ -21,16 +21,13 @@
          </tr>
          </thead>
        <tbody>
-           
-        
-        
          <tr>
           <td><%= @day %></td>
           <td><%= @youbi %></td>
           <td><%= f.time_field :finished_overwork_at, class: "form-control" %></td>
           <td><%= f.check_box(:next_day, { :checked => false  }) %></td>
           <td><%= f.text_field :work_process, class: "form-control" %></td>
-          <td><%= f.select :superior, [["superior", "上長"],["管理者", "管理者"]],:include_blank => true ,class:"form-control" %></td>
+          <td><%= f.select :superior, ["上長A","上長B"],:include_blank => true ,class:"form-control" %></td>
          </tr>
          
        </tbody>

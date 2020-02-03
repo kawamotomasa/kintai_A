@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:edit_overwork_request]
   #before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   #before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info,:working,:bases,:edit_overwork_request]
+  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info,:working,:bases]
   before_action :admin_or_correct_user, only: [:index,:show,:edit,:update]
   before_action :set_one_month, only: :show
 
@@ -43,6 +43,15 @@ class UsersController < ApplicationController
       render :edit      
     end
   end
+  
+  def import
+    User.import(params[:file])
+    redirect_to users_url
+  end
+ 
+  def working
+  @user = User.joins(:attendances).where.not(attendances: {started_at: nil}).where(attendances: {finished_at: nil})
+  end
 
   def destroy
     @user.destroy
@@ -63,16 +72,26 @@ class UsersController < ApplicationController
   end
   
   def edit_overwork_request
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+    
+    @day=Date.parse(params[:day])
+    @youbi = params[:youbi]
+    @dates = user_attendances_month_date
+    
   end
-  
-  def update_overwork_request
-  end
-  
-  
 
-  def bases
-  end
-  
+ def update_overwork_request
+    @user = Attendance.find(params[:id])
+    
+    if @user.update_attributes(overwork_request_params)
+       flash[:success] = "残業申請しました"
+    else
+       flash[:danger] = "#{@user.name}の更新は失敗しました。" + @user.errors.full_messages.join("、")
+    end
+       redirect_to users_url  
+ end
+
   
   private
 

@@ -56,42 +56,22 @@ class User < ApplicationRecord
   where("name like ?", "%#{name}%")
   }
   
-end
+   def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      # IDが見つかれば、レコードを呼び出し、見つかれなければ、新しく作成
+      user = find_by(id: row["id"]) || new
+      # CSVからデータを取得し、設定する
+      user.attributes = row.to_hash.slice(*updatable_attributes)
+      # 保存する
+      user.save
+    end
+   end
 
-def self.import(file)
-
-      imported_num = 0
-
-      # 文字コード変換のためにKernel#openとCSV#newを併用。
-      # 参考: http://qiita.com/labocho/items/8559576b71642b79df67
-      open(file.path, 'r:cp932:utf-8', undef: :replace) do |f|
-        csv = CSV.new(f, :headers => :first_row)
-        csv.each do |row|
-          next if row.header_row?
-
-          # CSVの行情報をHASHに変換
-          table = Hash[[row.headers, row.fields].transpose]
-
-          # 登録済みユーザー情報取得。
-          # 登録されてなければ作成
-          user = find_by(:id => table["id"])
-          if user.nil?
-            user = new
-          end
-
-          # ユーザー情報更新
-          user.attributes = table.to_hash.slice(
-                              *table.to_hash.except(:id, :created_at, :updated_at).keys)
-
-          # バリデーションOKの場合は保存
-          if user.valid?
-            user.save!
-            imported_num += 1
-          end
-        end
-      end
-
-      # 更新件数を返却
-      imported_num
-
+  # 更新を許可するカラムを定義
+  def self.updatable_attributes
+    ["id", "name", "age"]
+  end
+  
+  
+  
 end

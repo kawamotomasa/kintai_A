@@ -44,6 +44,7 @@ class AttendancesController < ApplicationController
     end
   end
 
+  
   private
 
     # 1ヶ月分の勤怠情報を扱います。

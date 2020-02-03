@@ -14,18 +14,25 @@
       <td colspan = "3">基本時間：<%= format_basic_info(@user.basic_time) %></td>
       <td>月初日：<%= l(@first_day, format: :short) %></td>
     </tr>
-
+  
     <tr>
       <td>所属：<%= @user.department.present? ? @user.department : "未所属" %></td>
       <td>名前：<%= @user.name %></td>
       <td>コード</td>
-      <td> </td>
+      <td><%= @user.employee_number %></td>
       <td>出勤日数:<%= @worked_sum %>日</td>
       <td>月末日：<%= l(@last_day, format: :short) %></td>
     </tr>
   </table>
 </div>
  
+ <% if current_user.superior? %>
+ <h5>【所属長承認申請のお知らせ】</h5>
+  <%= link_to "【残業申請のお知らせ】", "#", remote: true%></br>
+ 
+  <%= link_to "【勤怠変更のお知らせ】", "#", remote: true%></br>
+ <%end%><br>
+  
  <divclass="btn-users-show">
    
    <%= link_to "勤怠の編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
@@ -52,7 +59,7 @@
        <td colspan="1">終了予定時間</td>
        <td rowspan="1">時間外時間</td>
        <td rowspan="1">業務処理内容</td>
-       <td rowspan="1">指示者確認㊞</td>
+       <td rowspan="1">指示者確認?</td>
        </tr>
     </thead>
 
@@ -60,7 +67,7 @@
       <% @attendances.each do |day| %>
         <tr>
          <td>  
-         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_overwork_request">残業申請</button>
+   <%= link_to "残業申請", edit_overwork_request_user_path(@user, params: { day: day.worked_on,youbi: %w{日 月 火 水 木 金 土}[day.worked_on.wday]}), remote: true, class: "btn btn-primary"  %>
          </td>
          <td><%= l(day.worked_on, format: :short) %></td>
           <td>
@@ -86,10 +93,12 @@
             <% end %>
           </td>
           <td><%= day.note %></td>
+          
           <td></td>
           <td></td>
           <td></td>
           <td></td>
+          
         </tr>
       <% end %>
     </tbody>
@@ -113,6 +122,5 @@
     </tfoot>
   </table>
 </div>
-<div class="modal fade" id="edit_overwork_request" tabindex="-1">
-    <%= render "edit_overwork_request" %>
-</div>
+<!--モーダルウインドウ表示-->
+<div id="edit-overwork-request" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

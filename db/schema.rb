@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_070027) do
+ActiveRecord::Schema.define(version: 2020_02_03_044403) do
 
   create_table "attendances", force: :cascade do |t|
     t.date "worked_on"
@@ -20,7 +20,19 @@ ActiveRecord::Schema.define(version: 2019_09_21_070027) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "finished_overwork_at"
+    t.string "work_process"
+    t.integer "instructor"
     t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
+  create_table "bases", force: :cascade do |t|
+    t.integer "office_no"
+    t.string "office_name"
+    t.string "work_kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["office_no"], name: "index_bases_on_office_no", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,8 +44,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_070027) do
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "department"
-    t.datetime "basic_time", default: "2019-09-12 23:00:00"
-    t.datetime "work_time", default: "2019-09-12 22:30:00"
+    t.datetime "basic_time", default: "2020-01-24 23:00:00"
+    t.datetime "work_time", default: "2020-01-24 22:30:00"
     t.boolean "superior", default: false
     t.string "employee_number"
     t.string "uid"

@@ -1,0 +1,18 @@
+<%#社員一覧のviewページ%>
+<% provide(:title, '出勤社員一覧') %>
+<div>
+  <h1>出勤中社員一覧</h1>
+<table class="table-bordered table-striped table-condensed">
+    <tr>
+      <td class="center">社員番号</td>
+      <td class="center">名前</td>
+    </tr>
+  <% @user.each do |user| %>
+        <tr>
+          <td class="center"><%= user.employee_number %></td>
+          <td class="center"><%= user.name %></td>
+        </tr>
+   <% end %>
+      </tr>
+</table>
+</div>

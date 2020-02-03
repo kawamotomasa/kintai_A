@@ -1,0 +1,17 @@
+<% provide(:button_text, '更新') %>
+
+<h1>拠点編集画面</h1>
+
+<%= form_with(model: @bases, local: true) do |f| %>
+
+  <%= f.label :拠点番号, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :office_no, class: "form-control" %>
+
+  <%= f.label :拠点名, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :office_name, class: "form-control" %>
+  
+  <%= f.label :勤怠種類, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :work_kind, class: "form-control" %></br>
+  
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+<% end %>
