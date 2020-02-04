@@ -1,7 +1,7 @@
 <% provide(:title, 'All Users') %>
 <% provide(:button_text1, '検索') %>
 <% provide(:button_text2, '更新') %>
-<% provide(:button_text3, 'CSVインポート') %>
+<% provide(:button_text3, 'インポート') %>
 
 
 <% if params[:name].present?  %>
@@ -20,8 +20,8 @@
 </div>
 
 
-<%= form_tag(users_path, method: "post", multipart: true) do %>
-  <%= file_field_tag :file %>
+<%= form_tag '/users/:user_id/users/import', multipart: true do %>
+  <%= file_field_tag :csv_file %>
   <%= submit_tag yield(:button_text3), class: "btn btn-primary btn-#{yield(:class_text)}" %>
 <% end %>
 

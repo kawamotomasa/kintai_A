@@ -45,8 +45,13 @@ class UsersController < ApplicationController
   end
   
   def import
-    User.import(params[:file])
-    redirect_to users_url
+    
+  if params[:csv_file].blank?
+     redirect_to(users_url, alert: 'インポートするCSVファイルを選択してください')
+  else
+    num = Admin::User.import(params[:csv_file])
+    redirect_to(users_url, notice: "#{num.to_s}件のユーザー情報を追加 / 更新しました")
+  end
   end
  
   def working

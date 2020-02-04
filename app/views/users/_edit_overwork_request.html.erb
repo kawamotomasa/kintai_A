@@ -7,7 +7,7 @@
         <h4 class="modal-title">【残業申請】</h4>
       </div>
       <div class="modal-body">
-        <%= form_with(model: @attendance, url: update_overwork_request_user_path(@user), local: true, method: :patch) do |f| %> 
+        <%= form_with(model: Attendance, url: update_overwork_request_user_path(@user), local: true, method: :patch) do |f| %> 
         <%= f.hidden_field :id, :value => @attendance %>
         <table class="table table-bordered">
           <thead>
