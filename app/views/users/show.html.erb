@@ -27,10 +27,9 @@
 </div>
  
  <% if current_user.superior? %>
- <h5>【所属長承認申請のお知らせ】</h5>
+  <%= link_to "【所属長承認申請のお知らせ】","#",remote: true%> </br>
+    <%= link_to "【勤怠変更のお知らせ】", "#", remote: true%></br>
   <%= link_to "【残業申請のお知らせ】", "#", remote: true%></br>
- 
-  <%= link_to "【勤怠変更のお知らせ】", "#", remote: true%></br>
  <%end%><br>
   
  <divclass="btn-users-show">
@@ -49,15 +48,15 @@
         <th colspan="1" rowspan="2">日付</th>
         <th colspan="1" rowspan="2">曜日</th>
         <td colspan="5">【実績】</td>
-        <td colspan="4">所定外勤務</td>
+        <td colspan="5">所定外勤務</td>
       </tr>
        <td colspan="1">勤怠登録</td>
        <td colspan="1">出社</td>
        <td colspan="1">退社</td>
-       <td rowspan="1">在社時間</td>
+       <td colspan="1">在社時間</td>
        <td rowspan="1">備考</td>
        <td colspan="1">終了予定時間</td>
-       <td rowspan="1">時間外時間</td>
+       <td colspan="1">時間外時間</td>
        <td rowspan="1">業務処理内容</td>
        <td rowspan="1">指示者確認?</td>
        </tr>
@@ -118,7 +117,6 @@
          <td colspan="4"><%= @attendances.count %></td>
          <td colspan="3"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
          <td colspan="3"><%= format("%.2f", @total_working_times.to_f) %></td>
-         <td colspan="2" rowspan="2">
       </tr>
     </tfoot>
   </table>

@@ -1,4 +1,6 @@
 class BasesController < ApplicationController
+before_action :admin_user, only: [:index, :new, :update,:create,:edit,:destroy]
+
 
   def index
    @bases = Bases.paginate(page: params[:page])
@@ -13,7 +15,6 @@ class BasesController < ApplicationController
   
   def update
    @bases = Bases.find(params[:id])
-    debugger
     if @bases.update_attributes(bases_params)
        flash[:success] = "拠点情報を更新しました。"
        redirect_to bases_path
@@ -24,7 +25,6 @@ class BasesController < ApplicationController
   
   def create
     @bases = Bases.new(bases_params)
-    debugger
      if @bases.save
        flash[:success] = '新規作成に成功しました。'
        redirect_to bases_path
