@@ -43,7 +43,6 @@ class AttendancesController < ApplicationController
       redirect_to user_url(date: params[:date])
     end
   end
-
   
   private
 
@@ -51,13 +50,13 @@ class AttendancesController < ApplicationController
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
     end
-
+    
     # beforeフィルター
 
     # 管理権限者、または現在ログインしているユーザーを許可します。
     def admin_or_correct_user
       unless current_user?(@user) || current_user.admin?
-        flash[:danger] = "編集権限がありません。"
+            flash[:danger] = "編集権限がありません。"
         redirect_to(root_url)
       end  
     end

@@ -1,6 +1,6 @@
 
 <h1>拠点新規画面</h1>
-<%= form_with(model: @bases, url:bases_path,method: "post", local: true) do |f| %>
+<%= form_with(model: Bases, url:bases_path,method: "post", local: true) do |f| %>
  <%= f.label :拠点番号, class: "label-#{yield(:class_text)}" %>
  <%= f.text_field :office_no, class: "form-control" %>
 

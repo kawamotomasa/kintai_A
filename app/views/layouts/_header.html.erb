@@ -18,7 +18,9 @@
               <% unless current_user.try(:admin) %>
               <li><%= link_to "勤怠情報表示", current_user %></li>
               <% end %>
+              <% if current_user.try(:admin)%>
               <li><%= link_to "アカウント情報の更新", edit_user_path(current_user) %></li>
+              <% end %>
               <li class="divider"></li>
               <li>
                 <%= link_to "ログアウト", logout_path, method: :delete %>

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'bases', to: 'bases#index'
   get 'newbases', to: 'bases#new'
   post 'bases', to: 'bases#create'
+  
+  
   resources :bases, only:[:index,:update,:edit]
   
   resources :users do

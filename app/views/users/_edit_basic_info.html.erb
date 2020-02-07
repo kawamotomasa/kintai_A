@@ -18,14 +18,14 @@
             <%= f.label :name, class: "label-#{yield(:class_text)}" %>
             <p><%= @user.name %></p>
 
-            <%= f.label :department, class: "label-#{yield(:class_text)}" %>
-            <%= f.text_field :department, class: "form-control" %>
+            <%= f.label :affiliation, class: "label-#{yield(:class_text)}" %>
+            <%= f.text_field :affiliation, class: "form-control" %>
 
             <%= f.label :basic_time, class: "label-#{yield(:class_text)}" %>
            <p> <%= f.time_select :basic_time, class: "form-control" %><p>
 
-            <%= f.label :work_time, class: "label-#{yield(:class_text)}" %>
-            <p><%= f.time_select :work_time, class: "form-control" %><p>
+            <%= f.label :basic_work_time, class: "label-#{yield(:class_text)}" %>
+            <p><%= f.time_select :basic_work_time, class: "form-control" %><p>
 
             <div class="center">
               <%= f.submit yield(:button_text), class: "btn btn-primary btn-#{yield(:class_text)}" %>
