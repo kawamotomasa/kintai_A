@@ -8,10 +8,10 @@
          <%= link_to "次月へ ⇨", user_path(date: @first_day.next_month), class: "btn btn-info" %>
       </td>
       <td>
-          指定勤務開始時間:<%= format_basic_info(@user.work_time) %><br>
-          指定勤務終了時間:<%= format_basic_info(@user.work_time) %><br>
+          指定勤務開始時間:<%= format_basic_info(@user.designated_work_start_time) %><br>
+          指定勤務終了時間:<%= format_basic_info(@user.designated_work_end_time) %><br>
       </td>
-      <td colspan = "3">基本時間：<%= format_basic_info(@user.basic_time) %></td>
+      <td colspan = "3">基本時間：<%= format_basic_info(@user.basic_work_time) %></td>
       <td>月初日：<%= l(@first_day, format: :short) %></td>
     </tr>
   
